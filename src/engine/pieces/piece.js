@@ -26,7 +26,7 @@ export default class Piece {
 
             const square = Square.at(curRow, curCol);
 
-            valid = board.isOnBoard(square) && !board.getPiece(square);
+            valid = board.isMovable(square);
 
             if (valid) moves.push(square);
         }

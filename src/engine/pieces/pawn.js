@@ -13,12 +13,12 @@ export default class Pawn extends Piece {
         const availableMoves = [];
 
         const nextSquare = Square.at(startRow + Player.direction(this.player), startCol);
-        if (board.isOnBoard(nextSquare) && !board.getPiece(nextSquare)) {
+        if (board.isMovable(nextSquare)) {
             availableMoves.push(nextSquare);
 
             if (!this.hasMoved) {
                 const secondSquare = Square.at(startRow + 2 * Player.direction(this.player), startCol);
-                if (board.isOnBoard(secondSquare) && !board.getPiece(secondSquare)) {
+                if (board.isMovable(secondSquare)) {
                     availableMoves.push(secondSquare);
                 }
             }

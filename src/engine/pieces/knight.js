@@ -11,7 +11,7 @@ export default class Knight extends Piece {
         
         const directions = [[2, 1], [2, -1], [1, -2], [-1, -2], [-2, -1], [-2, 1], [-1, 2], [1, 2]];
         const moves = directions.map(([dx, dy]) => Square.at(startRow + dx, startCol + dy));
-        const availableMoves = moves.filter(board.isOnBoard(square) && !board.getPiece(square));
+        const availableMoves = moves.filter(square => board.isMovable(square));
         return availableMoves;
     }
 }
