@@ -41,4 +41,21 @@ export default class Piece {
 
         return moves;
     }
+
+    filterMoves(board, directions) {
+        const { row: startRow, col: startCol } = board.findPiece(this);
+
+        const moves = directions.map(([dx, dy]) => Square.at(startRow + dx, startCol + dy))
+        const availableMoves = moves.filter(square => board.isMovable(square));
+        return availableMoves;
+    }
+
+    getRotatedDirections(...directions) {
+        return directions.flatMap(([dx, dy]) => [
+            [dx, dy],
+            [-dy, dx],
+            [-dx, -dy],
+            [dy, -dx]
+        ]);
+    }
 }

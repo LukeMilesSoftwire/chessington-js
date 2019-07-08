@@ -6,8 +6,7 @@ export default class Bishop extends Piece {
     }
 
     getAvailableMoves(board) {
-        const directions = [[1, 1], [1, -1], [-1, -1], [-1, 1]];
-
+        const directions = this.getRotatedDirections([1, 1]);
         return this.getMovesInDirections(board, directions);
     }
 }

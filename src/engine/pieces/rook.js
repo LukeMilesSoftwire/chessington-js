@@ -6,8 +6,7 @@ export default class Rook extends Piece {
     }
 
     getAvailableMoves(board) {
-        const directions = [[0, 1], [1, 0], [0, -1], [-1, 0]];
-
+        const directions = this.getRotatedDirections([0, 1]);
         return this.getMovesInDirections(board, directions);
     }
 }
