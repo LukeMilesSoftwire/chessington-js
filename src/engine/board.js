@@ -6,6 +6,7 @@ export default class Board {
     constructor(currentPlayer) {
         this.currentPlayer = currentPlayer ? currentPlayer : Player.WHITE;
         this.board = this.createBoard();
+        this.lastMove = null;
     }
 
     createBoard() {
@@ -45,6 +46,11 @@ export default class Board {
             this.setPiece(toSquare, movingPiece);
             this.setPiece(fromSquare, undefined);
             this.currentPlayer = (this.currentPlayer === Player.WHITE ? Player.BLACK : Player.WHITE);
+            this.lastMove = {
+                piece: movingPiece,
+                from: fromSquare,
+                to: toSquare
+            };
         }
     }
 }
