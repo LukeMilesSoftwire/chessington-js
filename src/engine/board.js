@@ -20,6 +20,11 @@ export default class Board {
         this.board[square.row][square.col] = piece;
     }
 
+    isOnBoard({ row, col }) {
+        return (row < 8 && row >= 0 && col < 8 && col >= 0);
+    }
+
+
     getPiece(square) {
         return this.board[square.row][square.col];
     }
