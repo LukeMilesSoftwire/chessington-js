@@ -23,6 +23,16 @@ export default class Pawn extends Piece {
                 }
             }
         }
+
+        for (const dx of [-1, 1]) {
+            const square = Square.at(startRow + Player.direction(this.player), startCol + dx);
+            if (board.isOnBoard(nextSquare)) {
+                const piece = board.getPiece(square);
+                if (piece && piece.canBeTakenBy(this)) {
+                    availableMoves.push(square);
+                }
+            } 
+        }
         
         return availableMoves;
     }
