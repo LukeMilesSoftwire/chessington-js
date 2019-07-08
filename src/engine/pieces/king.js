@@ -9,4 +9,8 @@ export default class King extends Piece {
         const directions = this.getRotatedDirections([0, 1], [1, 1]);
         return this.filterMoves(board, directions);
     }
+
+    canBeTakenBy(piece) {
+        return false;
+    }
 }

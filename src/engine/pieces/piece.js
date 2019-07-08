@@ -6,6 +6,10 @@ export default class Piece {
         this.hasMoved = false;
     }
 
+    canBeTakenBy(piece) {
+        return piece.player !== this.player;
+    }
+
     getAvailableMoves(board) {
         throw new Error('This method must be implemented, and return a list of available moves');
     }
@@ -19,14 +23,23 @@ export default class Piece {
     getMovesInDirection(board, { row: curRow, col: curCol }, dx, dy) {
         const moves = [];
 
-        let valid = true;
-        while (valid) {
+        let done = false;
+        while (!done) {
             curRow += dy;
             curCol += dx;
 
             const square = Square.at(curRow, curCol);
-
-            valid = board.isMovable(square);
+            
+            let valid = false;
+            if (board.isOnBoard(square)) {
+                const piece = board.getPiece(square);
+                if (!piece) valid = true;
+                else {
+                    done = true;
+                    valid = piece.canBeTakenBy(this);
+                }
+            }
+            else done = true;
 
             if (valid) moves.push(square);
         }
@@ -46,7 +59,13 @@ export default class Piece {
         const { row: startRow, col: startCol } = board.findPiece(this);
 
         const moves = directions.map(([dx, dy]) => Square.at(startRow + dx, startCol + dy))
-        const availableMoves = moves.filter(square => board.isMovable(square));
+        const availableMoves = moves.filter(square => {
+            if (!board.isOnBoard(square)) return false;
+            else {
+                const piece = board.getPiece(square);
+                return !piece || piece.player !== this.player;
+            }
+        });
         return availableMoves;
     }
 

@@ -24,10 +24,6 @@ export default class Board {
         return (row < 8 && row >= 0 && col < 8 && col >= 0);
     }
 
-    isMovable(square) {
-        return this.isOnBoard(square) && !this.getPiece(square)
-    }
-
     getPiece(square) {
         return this.board[square.row][square.col];
     }
