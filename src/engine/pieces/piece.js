@@ -63,7 +63,7 @@ export default class Piece {
             if (!board.isOnBoard(square)) return false;
             else {
                 const piece = board.getPiece(square);
-                return !piece || piece.player !== this.player;
+                return !piece || piece.canBeTakenBy(this);
             }
         });
         return availableMoves;
