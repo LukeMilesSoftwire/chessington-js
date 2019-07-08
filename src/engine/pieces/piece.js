@@ -1,3 +1,5 @@
+import Square from '../square';
+
 export default class Piece {
     constructor(player) {
         this.player = player;
@@ -12,5 +14,23 @@ export default class Piece {
         const currentSquare = board.findPiece(this);
         board.movePiece(currentSquare, newSquare);
         this.hasMoved = true;
+    }
+
+    getMovesInDirection(board, { row: curRow, col: curCol }, dx, dy) {
+        const moves = [];
+
+        let valid = true;
+        while (valid) {
+            curRow += dy;
+            curCol += dx;
+
+            const square = Square.at(curRow, curCol);
+
+            valid = board.isOnBoard(square) && !board.getPiece(square);
+
+            if (valid) moves.push(square);
+        }
+
+        return moves;
     }
 }
