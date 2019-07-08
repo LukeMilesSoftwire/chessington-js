@@ -33,4 +33,12 @@ export default class Piece {
 
         return moves;
     }
+
+    getMovesInDirections(board, directions) {
+        const currentSquare = board.findPiece(this);
+
+        const moves = directions.flatMap(([dx, dy]) => this.getMovesInDirection(board, currentSquare, dx, dy));
+
+        return moves;
+    }
 }
